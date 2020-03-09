@@ -45,7 +45,5 @@ footer {
 #gameCanvas{
     height: 100%;
     border: 10px groove rgb(184, 13, 41);
-    width: 60%;
-
 }
 
