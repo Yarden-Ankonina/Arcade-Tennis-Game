@@ -4,4 +4,4 @@ Followed Udemy course : Code Your First Game: Arcade Classic in JavaScript on Ca
 Technolegies : 
 ![Image of html5](https://i.udemycdn.com/course/750x422/1344866_5c41.jpg)|![canvas](https://i0.wp.com/storage.googleapis.com/blog-images-backup/1*sQuSbqYHW-38cJXo3RsvWA.png?ssl=1)
 -----------------------------------------------------------------------------------------------------------------------
-Copyright © 2020 Yarden Ankonina, All Rights Reserved
+Made by Yarden Ankonina, All Rights Reserved
