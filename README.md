@@ -1,4 +1,4 @@
-# Arcade-Tennis-Game ![Link](https://arcadetennis.netlify.com/)
+# Arcade-Tennis-Game https://arcadetennis.netlify.com/
 Followed Udemy course : Code Your First Game: Arcade Classic in JavaScript on Canvas by @Chris DeLeon|Added my own features.
 -----------------------------------------------------------------------------------------------------|----------------------
 Technolegies : 
