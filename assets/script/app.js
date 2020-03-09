@@ -41,7 +41,9 @@ let computerSpeed = 8;
 let playAgainFlag = true;
 let playAgain = document.getElementById("playAgain");
 let hardFlag = false;
-
+let scoreLeft = document.getElementsByClassName("scoreLeft")[0];
+let scoreRight = document.getElementsByClassName("scoreRight")[0];
+let body = document.querySelector("body");
 
 function calculateMousePosition(event){
     let rect = canvas.getBoundingClientRect();
@@ -60,7 +62,7 @@ function calculateMousePosition(event){
 window.onload =  function(){
     canvas = document.getElementById("gameCanvas");
     canvasContext = canvas.getContext('2d');
-    canvasContext.font = "noraml 36px Arial";
+    canvasContext.font = "16px Arial";
     let farmesPerSecond = 30;
     setInterval(callBoth, 1000/farmesPerSecond ) ;
 
@@ -91,9 +93,17 @@ window.onload =  function(){
 
     }); 
 
+    //phone touch extra
+    body.addEventListener('mousedown', function(event){
+        let mousePos2 = calculateMousePosition(event);
+        paddle.left.y = mousePos2.y-(paddle.height/2);
+
+    });
+
     playAgain.addEventListener('click',function(){
         playAgainFlag = true;
         hardFlag = false;
+        restartGame();
         window.location.reload(true);
     });
 };
@@ -103,6 +113,8 @@ window.onload =  function(){
 function restartGame(){
     player.left.score = 0;
     player.right.score = 0;
+    scoreLeft.innerText = "0";
+    scoreRight.innerText = "0";
     ballReset();
 }
 
@@ -210,12 +222,12 @@ function drawEverything(){
         canvasContext.fillStyle = "white";
 
         if(player.left.score >= WINNING_SCORE){
-        canvasContext.fillText("LEFT PLAYER WON!", canvas.width/2 - 50, canvas.height/2);
-        canvasContext.fillText("click to play again", canvas.width/2 - 40, canvas.height/2 + 50);
+        canvasContext.fillText("LEFT PLAYER WON!", canvas.width/2 - 75, canvas.height/2);
+        canvasContext.fillText("click to play again", canvas.width/2 - 55, canvas.height/2 + 50);
         }
         else if(player.right.score >= WINNING_SCORE){
-        canvasContext.fillText("RIGHT PLAYER WON!", canvas.width/2 - 50, canvas.height/2 );
-        canvasContext.fillText("click to play again", canvas.width/2 - 40, canvas.height/2 + 50);
+        canvasContext.fillText("RIGHT PLAYER WON!", canvas.width/2 - 75, canvas.height/2 );
+        canvasContext.fillText("click to play again", canvas.width/2 - 55, canvas.height/2 + 50);
         }
         else{
 
@@ -225,7 +237,7 @@ function drawEverything(){
 
    if(playAgainFlag){
     canvasContext.fillStyle = "white";
-    canvasContext.fillText("Click on screen to play", canvas.width/2 - 40, canvas.height/2 + 50);
+    canvasContext.fillText("Click on screen to play", canvas.width/2 - 80, canvas.height/2 + 55);
    }
     drawNet();
     //left paddle
