@@ -1,13 +1,15 @@
 
 let canvas;
 let canvasContext;
-const WINNING_SCORE = 11;
 let ball = {
-    x : 50,
-    y : 50, 
+    x : 400,
+    y : 300, 
     speedX : 15, 
     speedY : 4,
-    color : "white",
+    color : {
+        easy : "white",
+        hard : "red",
+    },
     radius : 10,
 }
 let paddle = {
@@ -31,13 +33,14 @@ let player = {
 
 }
 
+const WINNING_SCORE = 11;
 let showWinScreen = false;
-
-let easy = document.getElementById("easy");
-let hard = document.getElementById("hard");
-
-let computerSpeed = 6;
-
+const easy = document.getElementById("easy");
+const hard = document.getElementById("hard");
+let computerSpeed = 8;
+let playAgainFlag = true;
+let playAgain = document.getElementById("playAgain");
+let hardFlag = false;
 
 
 function calculateMousePosition(event){
@@ -45,7 +48,7 @@ function calculateMousePosition(event){
     let root = document.documentElement;
     let mouse = {
         x : event.clientX - rect.left - root.scrollLeft,
-        y : event.clientY - rect.top - root.scrollTop,
+        y : event.clientY - rect.top,
     }
     return {
         x : mouse.x,
@@ -67,6 +70,7 @@ window.onload =  function(){
     });
 
     canvas.addEventListener('click', function(){
+        playAgainFlag = false;
         if(showWinScreen){
             restartGame();
             showWinScreen = false;
@@ -75,14 +79,22 @@ window.onload =  function(){
 
     easy.addEventListener('click',function(){
         ball.speedX = 15;
-        computerSpeed = 6;
+        computerSpeed = 8;
+        hardFlag = false;
         restartGame();
     });
     hard.addEventListener('click',function(){
         ball.speedX = 25;
-        computerSpeed = 12;
+        computerSpeed = 14;
+        hardFlag = true;
         restartGame();
 
+    }); 
+
+    playAgain.addEventListener('click',function(){
+        playAgainFlag = true;
+        hardFlag = false;
+        window.location.reload(true);
     });
 };
 
@@ -114,8 +126,16 @@ function moveEverything(){
     if(showWinScreen){
         return;
     }
-    ball.x += ball.speedX;
-    ball.y += ball.speedY;
+    if(playAgainFlag)
+    {
+        ball.x = canvas.width/2;
+        ball.y = canvas.height/2;
+    }
+    else{
+        ball.x += ball.speedX;
+        ball.y += ball.speedY;
+    }
+    
 
     computerMovement();
 
@@ -131,6 +151,7 @@ function moveEverything(){
         }
         else{
             player.left.score++;
+            document.getElementsByClassName("scoreRight")[0].innerText = player.left.score;
             ballReset();
         }
     } 
@@ -144,9 +165,14 @@ function moveEverything(){
         }
         else{
             player.right.score++;
+            document.getElementsByClassName("scoreLeft")[0].innerText = player.right.score;
             ballReset();
         }
     }
+}
+
+function getRandomInt(max){
+    return Math.floor(Math.random()*Math.floor(max));
 }
 
 function ballReset(){
@@ -155,7 +181,18 @@ function ballReset(){
     }
     ball.x = canvas.width/2;
     ball.y = canvas.height/2;
-    ball.speedX = -ball.speedX;
+
+    ball.speedX = 1;
+    setTimeout(function(){
+        if(0 === getRandomInt(2)){
+            ball.speedX = 15;
+        }
+        else{
+            ball.speedX = -15;
+        }
+    },2000);
+   
+
 }
 
 function drawNet(){
@@ -185,6 +222,11 @@ function drawEverything(){
         }
         return;
     }
+
+   if(playAgainFlag){
+    canvasContext.fillStyle = "white";
+    canvasContext.fillText("Click on screen to play", canvas.width/2 - 40, canvas.height/2 + 50);
+   }
     drawNet();
     //left paddle
     colorRect(0, paddle.left.y, paddle.width, paddle.height, "white");
@@ -193,11 +235,18 @@ function drawEverything(){
     colorRect(canvas.width - paddle.width, paddle.right.y, paddle.width, paddle.height, "white");
 
     //ball
-    colorCircle(ball.x, ball.y, ball.radius, ball.color);
+    //if hard mode
+    if(hardFlag){
+        colorCircle(ball.x, ball.y, ball.radius, ball.color.hard);
+    }
+    //if other mode
+    else{
+        colorCircle(ball.x, ball.y, ball.radius, ball.color.easy);
+    }
 
     //score
-    canvasContext.fillText(player.left.score, 100, 100);
-    canvasContext.fillText(player.right.score, canvas.width -100, 100);
+    // canvasContext.fillText(player.left.score, 100, 100);
+    //canvasContext.fillText(player.right.score, canvas.width -100, 100);
 
 }
 
