@@ -8,15 +8,27 @@
     <script type="text/javascript" src="/assets/script/app.js" defer></script>
 </head>
 <body>
-  
+    <header id="headerContainer">
+        <h1>Arcade Tennis</h1>
+        <h2>Modes</h2>
+        <div id="buttons">
+            <button id="easy">EASY</button>
+            <button id="hard">HARD</button>
+            <button id="playAgain">PLAY AGAIN</button>
+        </div>
+    </header>
+   
+    
+
+  <div id="canvasContainer">
+    <span class="score scoreLeft">0</span>
     <canvas id="gameCanvas" width="800" height="600">  </canvas>
-    <h1>Arcade Tennis</h1>
-    <h2>Modes</h2>
-    <button id="easy">EASY</button>
-    <button id="hard">HARD</button>
+    <span class="score scoreRight">0</span>
+  </div>
+    
 
 
     
-    <footer>made by Yarden Ankonina</footer>
+    <footer>Copyright © 2020 Yarden Ankonina, All Rights Reserved</footer>
 </body>
 </html>
