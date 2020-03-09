@@ -44,6 +44,9 @@ let hardFlag = false;
 let scoreLeft = document.getElementsByClassName("scoreLeft")[0];
 let scoreRight = document.getElementsByClassName("scoreRight")[0];
 let body = document.querySelector("body");
+let devil = document.getElementById("devil");
+
+devil.style.display = "none";
 
 function calculateMousePosition(event){
     let rect = canvas.getBoundingClientRect();
@@ -81,16 +84,16 @@ window.onload =  function(){
 
     easy.addEventListener('click',function(){
         ball.speedX = 15;
-        computerSpeed = 8;
+        computerSpeed = 6;
         hardFlag = false;
         restartGame();
     });
     hard.addEventListener('click',function(){
         ball.speedX = 25;
-        computerSpeed = 14;
+        computerSpeed = 8;
         hardFlag = true;
         restartGame();
-
+        canvasContext.drawImage(devil,100,0);
     }); 
 
     //phone touch extra
@@ -240,20 +243,26 @@ function drawEverything(){
     canvasContext.fillText("Click on screen to play", canvas.width/2 - 80, canvas.height/2 + 55);
    }
     drawNet();
-    //left paddle
-    colorRect(0, paddle.left.y, paddle.width, paddle.height, "white");
-
-    //right paddle
-    colorRect(canvas.width - paddle.width, paddle.right.y, paddle.width, paddle.height, "white");
+    
 
     //ball
     //if hard mode
     if(hardFlag){
         colorCircle(ball.x, ball.y, ball.radius, ball.color.hard);
+         //right paddle
+        colorRect(canvas.width - paddle.width, paddle.right.y, paddle.width, paddle.height+20, "red");
+         //left paddle
+        colorRect(0, paddle.left.y, paddle.width, paddle.height-40, "white");
+
     }
     //if other mode
     else{
+        //ball
         colorCircle(ball.x, ball.y, ball.radius, ball.color.easy);
+         //right paddle
+        colorRect(canvas.width - paddle.width, paddle.right.y, paddle.width, paddle.height, "white");
+        //left paddle
+        colorRect(0, paddle.left.y, paddle.width, paddle.height, "white");
     }
 
     //score
