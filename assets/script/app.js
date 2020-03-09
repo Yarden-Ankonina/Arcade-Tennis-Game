@@ -90,7 +90,7 @@ window.onload =  function(){
     });
     hard.addEventListener('click',function(){
         ball.speedX = 25;
-        computerSpeed = 9;
+        computerSpeed = 10;
         hardFlag = true;
         restartGame();
         canvasContext.drawImage(devil,100,0);
