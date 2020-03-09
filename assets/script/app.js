@@ -1,7 +1,7 @@
 
 let canvas;
 let canvasContext;
-const WINNING_SCORE = 3;
+const WINNING_SCORE = 11;
 let ball = {
     x : 50,
     y : 50, 
@@ -33,8 +33,10 @@ let player = {
 
 let showWinScreen = false;
 
+let easy = document.getElementById("easy");
+let hard = document.getElementById("hard");
 
-
+let computerSpeed = 6;
 
 
 
@@ -70,7 +72,18 @@ window.onload =  function(){
             showWinScreen = false;
         }
     });
-    
+
+    easy.addEventListener('click',function(){
+        ball.speedX = 15;
+        computerSpeed = 6;
+        restartGame();
+    });
+    hard.addEventListener('click',function(){
+        ball.speedX = 25;
+        computerSpeed = 12;
+        restartGame();
+
+    });
 };
 
 
@@ -90,10 +103,10 @@ function callBoth(){
 function computerMovement(){
     let rightPaddleCenter = paddle.right.y + (paddle.height/2);
     if(rightPaddleCenter < ball.y-35){
-        paddle.right.y += 6;
+        paddle.right.y += computerSpeed;
     }
     else if (rightPaddleCenter > ball.y+35){
-        paddle.right.y -= 6;
+        paddle.right.y -= computerSpeed;
     }
 }
 
