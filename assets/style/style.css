@@ -20,6 +20,10 @@ button {
 
 }
 
+button:hover {
+    background-color: rgb(247, 1, 42);
+}
+
 footer {
     margin-top: 15px;
     background-color: rgba(240, 48, 166, 0.295);
