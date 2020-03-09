@@ -1,4 +1,4 @@
-# Arcade-Tennis-Game
+# Arcade-Tennis-Game | ![Site](https://guides.github.com/features/mastering-markdown/)
 Followed Udemy course : Code Your First Game: Arcade Classic in JavaScript on Canvas by @Chris DeLeon|Added my own features.
 -----------------------------------------------------------------------------------------------------|----------------------
 Technolegies : 
